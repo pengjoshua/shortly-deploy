@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var linkSchema = new Schema({
+var LinkSchema = new Schema({
   url: String, 
   baseUrl: String,
   code: String, //we don't know how to set this yet
@@ -13,7 +13,7 @@ var linkSchema = new Schema({
   date: { type: Date, default: Date.now }
 });
 
-var Link = mongoose.model('Link', linkSchema);
+var Link = mongoose.model('Link', LinkSchema);
 
 Link.prototype.setCode = function (cb) {
   var shasum = crypto.createHash('sha1');
