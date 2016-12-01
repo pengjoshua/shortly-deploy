@@ -7,14 +7,13 @@ var Schema = mongoose.Schema;
 var LinkSchema = new Schema({
   url: String, 
   baseUrl: String,
-  code: String, //we don't know how to set this yet
+  code: String,
   title: String,
   visits: { type: Number, default: 0 },
   date: { type: Date, default: Date.now }
 });
 
 LinkSchema.pre('save', function(next) {
-  console.log('this.code =', this.code);
   if (!this.code) {
     this.setCode(function(err, link) {
       next();
@@ -34,20 +33,5 @@ Link.prototype.setCode = function (cb) {
     cb(err, link);
   });
 };
-
-// var Link = db.Model.extend({
-//   tableName: 'urls',
-//   hasTimestamps: true,
-//   defaults: {
-//     visits: 0
-//   },
-//   initialize: function() {
-//     this.on('creating', function(model, attrs, options) {
-//       var shasum = crypto.createHash('sha1');
-//       shasum.update(model.get('url'));
-//       model.set('code', shasum.digest('hex').slice(0, 5));
-//     });
-//   }
-// });
 
 module.exports = Link;
