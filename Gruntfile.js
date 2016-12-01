@@ -67,15 +67,16 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
-        multiple: {
-          command: [
-            'git add .',
-            'git commit -m "Deploying to Production Server"',
-            'git push live master'
-          ].join('&&')
-        }
+        command: 'git add . && git commit -m "Deploying to Production Server" && git push live master'
+        // multiple: {
+        //   command: [
+        //     'git add .',
+        //     'git commit -m "Deploying to Production Server"'//,
+        //     //'git push live master'
+        //   ].join('&&')
+        // }
       }
-    },
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
