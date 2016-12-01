@@ -13,6 +13,17 @@ var LinkSchema = new Schema({
   date: { type: Date, default: Date.now }
 });
 
+LinkSchema.pre('save', function(next) {
+  console.log('this.code =', this.code);
+  if (!this.code) {
+    this.setCode(function(err, link) {
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
 var Link = mongoose.model('Link', LinkSchema);
 
 Link.prototype.setCode = function (cb) {

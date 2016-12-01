@@ -172,6 +172,7 @@ describe('', function() {
   describe('Account Creation:', function() {
 
     it('Signup creates a new user', function(done) {
+      this.timeout(5000);
       request(app)
         .post('/signup')
         .send({
@@ -188,6 +189,7 @@ describe('', function() {
     });
 
     it('Successful signup logs in a new user', function(done) {
+      this.timeout(5000);
       request(app)
         .post('/signup')
         .send({
@@ -208,6 +210,7 @@ describe('', function() {
   describe('Account Login:', function() {
 
     beforeEach(function(done) {
+      this.timeout(5000);
       new User({
         'username': 'Phillip',
         'password': 'Phillip'
@@ -217,6 +220,7 @@ describe('', function() {
     });
 
     it('Logs in existing users', function(done) {
+      this.timeout(5000);
       request(app)
         .post('/login')
         .send({
