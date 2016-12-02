@@ -24,10 +24,9 @@ UserSchema.pre('save', function(next) {
 
 var User = mongoose.model('User', UserSchema);
 
-User.prototype.comparePassword = function(attemptedPassword, callback) {
-  bcrypt.compare(attemptedPassword, this.password, function(err, isMatch) {
-    callback(isMatch);
-  });
+User.prototype.comparePassword = function(attemptedPassword) {
+  var compare = Promise.promisify(bcrypt.compare);
+  return compare(attemptedPassword, this.password);
 };
 
 User.prototype.hashPassword = function(cb) {
